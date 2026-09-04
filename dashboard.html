@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body class="admin-site">
+  <aside class="admin-sidebar">
+    <a class="admin-brand" href="/admin/dashboard">CervCare Admin</a>
+    <nav class="admin-nav" aria-label="Admin navigation">
+      <a href="#dashboard-home">Dashboard</a>
+      <a href="#content-management">Content</a>
+      <a href="#categories-management">Categories</a>
+      <a href="#quiz-questions">Quiz Questions</a>
+      <a href="#usage-reports">Usage Reports</a>
+      <button id="logoutBtn" type="button">Log Out</button>
+    </nav>
+  </aside>
+
+  <main class="admin-main">
+    <header class="admin-header">
+      <span id="adminPageTitle">Dashboard</span>
+      <span>Signed in as <strong>admin</strong></span>
+    </header>
+
+    <section id="dashboard-home" class="admin-home">
+      <div class="admin-report-heading"><h1>Welcome back</h1></div>
+      <div id="adminHomeStats" class="admin-home-cards"></div>
+      <div class="admin-actions"><a href="#content-management">+ Add new article</a><a href="#quiz-questions">+ Add quiz question</a><a href="#usage-reports">View reports</a></div>
+      <div class="recent-activity"><h2>Recent activity</h2><div id="recentActivity"></div></div>
+    </section>
+
+    <section id="usage-reports" class="admin-report admin-view">
+      <div class="admin-report-heading">
+        <h1>Engagement overview</h1>
+        <p>Aggregate, non-personally-identifying counts only. These figures show which topics visitors engage with most.</p>
+      </div>
+      <div id="dashboardStats" class="admin-report-grid"></div>
+    </section>
+
+    <section id="content-management" class="admin-management admin-view">
+      <div class="admin-section-heading">
+        <h1>Articles</h1>
+        <p>Manage the educational content shown on the public site.</p>
+      </div>
+      <div class="content-panel admin-articles-table"><div class="admin-table-heading"><strong>Articles</strong><a href="#content-management">+ Add new content</a></div><div id="adminArticlesTable"></div></div>
+      <div id="new-content" class="admin-new-content">
+      <div class="dashboard-layout">
+        <div class="admin-panel">
+          <div class="section-head">
+            <h2>Add category</h2>
+          </div>
+          <form data-admin-form="category" class="mini-form">
+            <div class="field">
+              <label for="categoryName">Name</label>
+              <input id="categoryName" name="name" type="text" placeholder="Prevention" required />
+            </div>
+            <div class="field">
+              <label for="categoryIcon">Icon</label>
+              <input id="categoryIcon" name="icon" type="text" placeholder="🛡️" />
+            </div>
+            <div class="field">
+              <label for="categoryDescription">Description</label>
+              <textarea id="categoryDescription" name="description" rows="3" placeholder="Describe the category" required></textarea>
+            </div>
+            <div class="field">
+              <label for="categoryHighlights">Highlights</label>
+              <input id="categoryHighlights" name="highlights" type="text" placeholder="HPV vaccine, screening, prevention" />
+            </div>
+            <button class="btn btn-primary" type="submit">Save category</button>
+          </form>
+        </div>
+
+        <div class="admin-panel">
+          <div class="section-head">
+            <h2>Add article</h2>
+          </div>
+          <form data-admin-form="article" class="mini-form">
+            <div class="field">
+              <label for="articleTitle">Title</label>
+              <input id="articleTitle" name="title" type="text" placeholder="When screening matters most" required />
+            </div>
+            <div class="field">
+              <label for="articleCategory">Category</label>
+              <input id="articleCategory" name="category" type="text" placeholder="Screening" required />
+            </div>
+            <div class="field">
+              <label for="articleSummary">Summary</label>
+              <input id="articleSummary" name="summary" type="text" placeholder="Short summary" required />
+            </div>
+            <div class="field">
+              <label for="articleContent">Content</label>
+              <textarea id="articleContent" name="content" rows="4" placeholder="Write the educational article body" required></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit">Save article</button>
+          </form>
+        </div>
+
+        <div class="admin-panel">
+          <div class="section-head">
+            <h2>Add FAQ</h2>
+          </div>
+          <form data-admin-form="faq" class="mini-form">
+            <div class="field">
+              <label for="faqQuestion">Question</label>
+              <input id="faqQuestion" name="question" type="text" placeholder="How often should screening happen?" required />
+            </div>
+            <div class="field">
+              <label for="faqAnswer">Answer</label>
+              <textarea id="faqAnswer" name="answer" rows="4" placeholder="Answer the question clearly and carefully" required></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit">Save FAQ</button>
+          </form>
+        </div>
+      </div>
+      </div>
+    </section>
+
+    <section id="quiz-questions" class="admin-content-library admin-view">
+      <div class="content-panel">
+        <div class="section-head">
+          <h2>Current content library</h2>
+        </div>
+        <div id="adminContentList" class="list"></div>
+      </div>
+    </section>
+    <section id="categories-management" class="admin-content-library admin-view"><div class="content-panel"><h2>Categories</h2><div id="adminCategoriesList"></div></div></section>
+  </main>
+
+  <footer class="admin-footer"><a href="/">Public site</a><a href="/categories">Categories</a><a href="/article">Articles</a><a href="/faq">FAQ</a><a href="/disclaimer">Disclaimer</a></footer>
+  <div class="toast" id="toast"></div>
+  <script src="/app.js"></script>
+</body>
+</html>

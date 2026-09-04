@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Take a Quiz - Cervical Cancer Awareness</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .quiz-container {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 20px;
+        }
+
+        .quiz-header h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .quiz-header p {
+            color: #666;
+        }
+
+        .question-container {
+            margin-bottom: 30px;
+        }
+
+        .question-number {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .question-text {
+            font-size: 18px;
+            color: #333;
+            margin: 15px 0;
+            font-weight: 500;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option {
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .option:hover {
+            border-color: #667eea;
+            background-color: #f9f9f9;
+        }
+
+        .option input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .option input[type="radio"]:checked + label {
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .option.selected {
+            background-color: #f0f0ff;
+            border-color: #667eea;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            flex: 1;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background-color: #f0f0f0;
+            color: #333;
+            flex: 1;
+        }
+
+        .btn-secondary:hover {
+            background-color: #e0e0e0;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .result-container {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .result-container h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .score-display {
+            font-size: 48px;
+            font-weight: bold;
+            color: #764ba2;
+            margin: 20px 0;
+        }
+
+        .result-message {
+            color: #666;
+            margin: 20px 0;
+            font-size: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .quiz-container {
+                padding: 20px;
+            }
+
+            .question-text {
+                font-size: 16px;
+            }
+
+            .score-display {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="quiz-container" id="quizContent">
+            <div class="quiz-header">
+                <h1>Knowledge Assessment Quiz</h1>
+                <p>Test your understanding of cervical cancer awareness</p>
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+
+            <div id="questionContainer"></div>
+
+            <div class="navigation">
+                <button class="btn btn-secondary" id="prevBtn" disabled>← Previous</button>
+                <button class="btn btn-primary" id="nextBtn">Next →</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const quizzes = [
+            {
+                id: 1,
+                title: "Cervical Cancer Prevention",
+                questions: [
+                    {
+                        question: "At what age should HPV vaccination ideally begin?",
+                        options: ["11-12 years old", "21 years old", "30 years old", "40 years old"],
+                        correct: 0
+                    },
+                    {
+                        question: "Which of the following is the most effective prevention method?",
+                        options: ["Regular exercise", "HPV vaccination", "Vitamin supplements", "Frequent testing"],
+                        correct: 1
+                    },
+                    {
+                        question: "Is HPV vaccination effective after sexual activity?",
+                        options: ["Yes, completely", "Partially, but still beneficial", "No, not at all", "Only for women"],
+                        correct: 1
+                    },
+                    {
+                        question: "How often should women get a Pap smear?",
+                        options: ["Every year", "Every 3 years", "Every 5 years", "Once in a lifetime"],
+                        correct: 1
+                    },
+                    {
+                        question: "Which HPV types are most commonly associated with cervical cancer?",
+                        options: ["HPV 16 and 18", "HPV 1 and 2", "All HPV types equally", "Only HPV 31"],
+                        correct: 0
+                    }
+                ]
+            }
+        ];
+
+        let currentQuiz = 0;
+        let currentQuestion = 0;
+        let answers = [];
+        let score = 0;
+
+        function initQuiz() {
+            answers = new Array(quizzes[currentQuiz].questions.length).fill(null);
+            currentQuestion = 0;
+            score = 0;
+            displayQuestion();
+        }
+
+        function displayQuestion() {
+            const quiz = quizzes[currentQuiz];
+            const question = quiz.questions[currentQuestion];
+            const totalQuestions = quiz.questions.length;
+            const progress = ((currentQuestion + 1) / totalQuestions) * 100;
+
+            document.getElementById('progressBar').style.width = progress + '%';
+
+            let html = `
+                <div class="question-container">
+                    <div class="question-number">Question ${currentQuestion + 1} of ${totalQuestions}</div>
+                    <div class="question-text">${question.question}</div>
+                    <div class="options">
+            `;
+
+            question.options.forEach((option, index) => {
+                const isSelected = answers[currentQuestion] === index;
+                html += `
+                    <label class="option ${isSelected ? 'selected' : ''}">
+                        <input type="radio" name="answer" value="${index}" ${isSelected ? 'checked' : ''} 
+                               onchange="selectAnswer(${index})">
+                        ${option}
+                    </label>
+                `;
+            });
+
+            html += `
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('questionContainer').innerHTML = html;
+            updateNavigation();
+        }
+
+        function selectAnswer(index) {
+            answers[currentQuestion] = index;
+            document.querySelectorAll('.option').forEach((opt, i) => {
+                opt.classList.toggle('selected', i === index);
+            });
+        }
+
+        function updateNavigation() {
+            const quiz = quizzes[currentQuiz];
+            document.getElementById('prevBtn').disabled = currentQuestion === 0;
+            document.getElementById('nextBtn').textContent = currentQuestion === quiz.questions.length - 1 ? 'Submit Quiz' : 'Next →';
+        }
+
+        function calculateScore() {
+            const quiz = quizzes[currentQuiz];
+            score = 0;
+            quiz.questions.forEach((question, index) => {
+                if (answers[index] === question.correct) {
+                    score++;
+                }
+            });
+            return score;
+        }
+
+        function displayResult() {
+            const quiz = quizzes[currentQuiz];
+            const totalQuestions = quiz.questions.length;
+            const percentage = (score / totalQuestions) * 100;
+            const passed = percentage >= 70;
+
+            let html = `
+                <div class="result-container">
+                    <h2>Quiz Completed!</h2>
+                    <div class="score-display">${score}/${totalQuestions}</div>
+                    <div class="score-display" style="font-size: 28px; color: #667eea;">${Math.round(percentage)}%</div>
+                    <div class="result-message">
+                        ${passed ? '🎉 Excellent! You passed the quiz!' : '📚 Keep learning! Try again to improve your score.'}
+                    </div>
+                    <button class="btn btn-primary" onclick="location.href='/'">Back to Home</button>
+                </div>
+            `;
+            document.getElementById('quizContent').innerHTML = html;
+        }
+
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                displayQuestion();
+            }
+        });
+
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            const quiz = quizzes[currentQuiz];
+            if (answers[currentQuestion] === null) {
+                alert('Please select an answer before proceeding.');
+                return;
+            }
+
+            if (currentQuestion < quiz.questions.length - 1) {
+                currentQuestion++;
+                displayQuestion();
+            } else {
+                calculateScore();
+                displayResult();
+            }
+        });
+
+        initQuiz();
+    </script>
+</body>
+</html>

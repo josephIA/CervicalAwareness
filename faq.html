@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - Cervical Cancer Awareness</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            color: #667eea;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .faq-question {
+            background: #f9f9f9;
+            padding: 15px 20px;
+            cursor: pointer;
+            font-weight: 500;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+        }
+
+        .faq-question:hover {
+            background: #f0f0f0;
+        }
+
+        .faq-question.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .toggle-icon {
+            font-size: 20px;
+            transition: transform 0.3s;
+        }
+
+        .faq-question.active .toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 20px;
+        }
+
+        .faq-answer.active {
+            max-height: 500px;
+            padding: 20px;
+        }
+
+        .faq-answer p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Frequently Asked Questions</h1>
+    </header>
+
+    <div class="container">
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                <span>What is cervical cancer?</span>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="faq-answer">
+                <p>Cervical cancer develops in the cervix, the lower part of the uterus. It is primarily caused by infection with the Human Papillomavirus (HPV). When detected early, cervical cancer is highly treatable and preventable.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                <span>How can I prevent cervical cancer?</span>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="faq-answer">
+                <p>Prevention involves: HPV vaccination (ideally before sexual activity), regular Pap smear or HPV screening tests, maintaining a healthy lifestyle, avoiding smoking, practicing safe sex, and maintaining overall health through proper nutrition and exercise.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                <span>What is HPV and how does it cause cervical cancer?</span>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="faq-answer">
+                <p>HPV (Human Papillomavirus) is a common virus spread through sexual contact. While most HPV infections clear on their own, persistent infection with high-risk types (like HPV 16 and 18) can lead to cellular changes that may develop into cervical cancer if left undetected.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                <span>Is the HPV vaccine effective?</span>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="faq-answer">
+                <p>Yes, HPV vaccines are over 99% effective at preventing infection with HPV types 16 and 18 when administered before exposure. The vaccine is recommended for ages 11-26, though it can be given up to age 45. It works best when given before sexual activity begins.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                <span>What is a Pap smear test?</span>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="faq-answer">
+                <p>A Pap smear is a screening procedure where cells from the cervix are collected and examined under a microscope. It can detect precancerous or cancerous changes early, allowing for treatment before cancer develops. It's one of the most effective cancer screening tests available.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                <span>How often should I get screened?</span>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="faq-answer">
+                <p>Screening guidelines vary, but generally: Pap smear every 3-5 years for women 21-65 years old, or HPV testing every 5 years. It's best to discuss your individual screening schedule with your healthcare provider based on your risk factors.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                <span>What are the early symptoms of cervical cancer?</span>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="faq-answer">
+                <p>Early cervical cancer often has no symptoms. However, as it progresses, symptoms may include abnormal vaginal bleeding, pelvic pain, pain during intercourse, and unusual vaginal discharge. Any persistent symptoms should be discussed with a healthcare provider.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                <span>What treatment options are available?</span>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="faq-answer">
+                <p>Treatment depends on the cancer stage and may include surgery, radiation, chemotherapy, or a combination of these. Early-stage cancers are generally more treatable. Your healthcare team will recommend the best approach for your specific situation.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                <span>Where can I find support?</span>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="faq-answer">
+                <p>Support is available through healthcare providers, cancer support organizations, support groups for survivors, and online communities. Our resources page provides links to various support organizations and counseling services.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Cervical Cancer Awareness System. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function toggleFAQ(element) {
+            const question = element;
+            const answer = element.nextElementSibling;
+
+            document.querySelectorAll('.faq-answer').forEach(a => {
+                if (a !== answer) {
+                    a.classList.remove('active');
+                }
+            });
+
+            document.querySelectorAll('.faq-question').forEach(q => {
+                if (q !== question) {
+                    q.classList.remove('active');
+                }
+            });
+
+            question.classList.toggle('active');
+            answer.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

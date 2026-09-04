@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>Admin Login</title>
+   <link rel="stylesheet" href="/styles.css" />
+</head>
+<body class="teal-site">
+   <header class="topbar">
+     <div class="container topbar-inner">
+       <a class="brand" href="/">
+         <span class="brand-mark">🎗️</span>
+         <span>Awareness Hub</span>
+       </a>
+       <nav class="nav">
+         <a href="/">Home</a>
+         <a href="/quiz">Quiz</a>
+       </nav>
+       <div class="nav-actions">
+       </div>
+     </div>
+   </header>
+
+   <main class="page-hero">
+     <div class="container">
+       <div class="form-card">
+         <div class="eyebrow">Protected area</div>
+         <h1 class="page-title" style="font-size:2.2rem;">Admin login</h1>
+         <p class="page-copy">Use the dashboard to review awareness metrics and content performance.</p>
+         <form id="adminLoginForm">
+           <div class="field">
+             <label for="email">Email</label>
+             <input type="email" id="email" name="email" value="admin@awareness.local" required />
+           </div>
+           <div class="field">
+             <label for="password">Password</label>
+             <input type="password" id="password" name="password" value="Awareness@2026" required />
+           </div>
+           <button class="btn btn-primary" type="submit">Log in</button>
+         </form>
+       </div>
+     </div>
+   </main>
+   <footer class="footer"><div class="container footer-links"><a href="/categories">Categories</a><a href="/article">Articles</a><a href="/faq">FAQ</a><a href="/disclaimer">Disclaimer</a></div></footer>
+
+   <div class="toast" id="toast"></div>
+   <script src="/app.js"></script>
+ </body>
+</html>
